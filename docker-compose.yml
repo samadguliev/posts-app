@@ -10,5 +10,15 @@ services:
     volumes:
       - .:/usr/src/app
     command: air backend/cmd/main.go -b 0.0.0.0
-#    depends_on:
-#      - db
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: 'mongo:latest'
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
