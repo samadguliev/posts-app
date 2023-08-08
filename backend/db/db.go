@@ -7,20 +7,21 @@ import (
 	"log"
 )
 
-var Сlient *mongo.Client
+var Client *mongo.Client
 
-func DbConnect() {
-	clientOptions := options.Client().ApplyURI("mongodb://mongo:27017/db")
-	client, err := mongo.Connect(context.TODO(), clientOptions)
+func Connect() {
+	clientOptions := options.Client().ApplyURI("mongodb://mongodb:27017")
+	db, err := mongo.Connect(context.TODO(), clientOptions)
 
 	if err != nil {
-		log.Fatal("Connection to Database failed")
+		log.Fatal("Connection to Database failed: ", err)
 	}
 
-	err = client.Ping(context.TODO(), nil)
+	err = db.Ping(context.TODO(), nil)
 	if err != nil {
-		log.Fatal("Connection to Database failed")
+		log.Fatal("Connection to Database failed: ", err)
 	}
 
-	Сlient = client
+	log.Println("connected")
+	Client = db
 }
