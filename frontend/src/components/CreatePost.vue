@@ -1,12 +1,12 @@
 <template>
   <div class="hello">
-    <h1>Post list</h1>
+    <h1>Create post</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PostList',
+  name: 'CreatePost',
 }
 </script>
 
