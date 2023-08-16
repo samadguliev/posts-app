@@ -35,6 +35,9 @@
 </template>
 
 <script>
+import axios from "axios";
+const API_URL = "http://localhost:3000"
+
 export default {
   name: 'CreatePost',
   data() {
@@ -46,7 +49,17 @@ export default {
   },
   methods: {
     save() {
-      console.log('save')
+      axios
+          .post(`${API_URL}/posts`, {
+            title: this.title,
+            description: this.description,
+            text: this.text,
+          })
+          .catch(error => console.log(error))
+
+      this.title = ""
+      this.description = ""
+      this.text = ""
     }
   }
 }

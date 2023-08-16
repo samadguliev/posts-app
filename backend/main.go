@@ -4,15 +4,12 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/samadguliev/posts-app/backend/db"
+	"github.com/samadguliev/posts-app/backend/routes"
 )
 
 func main() {
 	db.Connect()
 	app := fiber.New()
-
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Get /")
-	})
 
 	app.Use(cors.New(cors.Config{
 		AllowHeaders:     "Origin,Content-Type,Accept,*",
@@ -21,5 +18,6 @@ func main() {
 		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
 	}))
 
+	routes.SetupRoutes(app)
 	app.Listen(":3000")
 }
